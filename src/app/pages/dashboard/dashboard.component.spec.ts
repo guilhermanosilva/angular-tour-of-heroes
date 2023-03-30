@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HeroSearchComponent } from '../hero-search/hero-search.component';
+import { HeroSearchComponent } from '../../components/hero-search/hero-search.component';
 
 import { DashboardComponent } from './dashboard.component';
 
