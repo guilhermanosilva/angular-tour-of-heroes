@@ -1,12 +1,9 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { throwError } from 'rxjs';
 import { Hero } from 'src/app/models/hero.model';
-import { MessageService } from '../message/message.service';
 import { HeroService } from './hero.service';
 
 const heroesUrl = 'api/heroes';
@@ -18,17 +15,15 @@ const heroesMock: Hero[] = [
 describe('HeroService', () => {
   let httpMock: HttpTestingController;
   let heroService: HeroService;
-  let messageService: MessageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [HeroService, MessageService],
+      providers: [HeroService],
     });
 
     httpMock = TestBed.inject(HttpTestingController);
     heroService = TestBed.inject(HeroService);
-    messageService = TestBed.inject(MessageService);
   });
 
   afterEach(() => {
@@ -77,10 +72,8 @@ describe('HeroService', () => {
 
   it('should update a hero', () => {
     const updatedHero: Hero = { id: 0, name: 'Hero Updated' };
-    const spy = spyOn(messageService, 'add');
 
     heroService.updateHero(updatedHero).subscribe();
-    // expect(spy).toHaveBeenCalledWith(`updated hero id=${updatedHero.id}`)
 
     const req = httpMock.expectOne(heroesUrl);
     expect(req.request.method).toBe('PUT');
